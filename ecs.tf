@@ -37,7 +37,7 @@ module "boardgamegeek-cleaner" {
     image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.us-west-2.amazonaws.com/${var.boardgamegeek-cleaner}:latest"
     cpu ="2048"
     memory ="16384"
-    region = var.region
+    region = var.REGION
 }
 
 module "boardgamegeek-cleaner_dev" {
@@ -52,7 +52,7 @@ module "boardgamegeek-cleaner_dev" {
     image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.us-west-2.amazonaws.com/${var.boardgamegeek-cleaner}_dev:latest"
     cpu ="2048"
     memory ="16384"
-    region = var.region
+    region = var.REGION
 }
 
 module "boardgamegeek-scraper" {
@@ -67,7 +67,7 @@ module "boardgamegeek-scraper" {
     image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.us-west-2.amazonaws.com/${var.boardgamegeek-scraper}:latest"
     cpu ="256"
     memory ="2048"
-    region = var.region
+    region = var.REGION
 }
 
 module "boardgamegeek-scraper_dev" {
@@ -82,7 +82,7 @@ module "boardgamegeek-scraper_dev" {
     image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.us-west-2.amazonaws.com/${var.boardgamegeek-scraper}_dev:latest"
     cpu ="256"
     memory ="2048"
-    region = var.region
+    region = var.REGION
 }
 
 # module "" {
@@ -96,5 +96,5 @@ module "boardgamegeek-scraper_dev" {
 #     execution_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${}_FargateExecutionRole"
 #     cpu ="2048"
 #     memory ="16384"
-#     region = var.region
+#     region = var.REGION
 # }

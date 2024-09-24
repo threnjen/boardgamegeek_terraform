@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "task_definition" {
         options = {
           "awslogs-group"         = "/ecs/${var.task_definition_name}",
           "awslogs-create-group"  = "true",
-          "awslogs-region"        = var.region,
+          "awslogs-region"        = var.REGION,
           "awslogs-stream-prefix" = "ecs"
         },
         secretOptions = []
@@ -57,7 +57,7 @@ resource "aws_ecs_task_definition" "task_definition" {
         options = {
           "awslogs-group"         = "/ecs/ecs-aws-otel-sidecar-collector",
           "awslogs-create-group"  = "true",
-          "awslogs-region"        = var.region,
+          "awslogs-region"        = var.REGION,
           "awslogs-stream-prefix" = "ecs"
         },
         secretOptions = []
