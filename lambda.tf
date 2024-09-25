@@ -9,6 +9,17 @@ module "bgg_generate_game_urls" {
   environment="prod"
 }
 
+module "bgg_generate_user_urls" {
+  source         = "./modules/lambda_function_direct"
+  function_name = "bgg_generate_user_urls"
+  timeout       = 900
+  memory_size   = 512
+  role          = aws_iam_role.bgg_generate_user_urls_lambda.arn
+  handler       = "bgg_generate_user_urls.lambda_handler"
+  layers = ["arn:aws:lambda:us-west-2:336392948345:layer:AWSSDKPandas-Python312:9"]
+  environment="prod"
+}
+
 module "boardgame_scraper_fargate_trigger" {
   source         = "./modules/lambda_function_direct"
   function_name = "boardgame_scraper_fargate_trigger"
