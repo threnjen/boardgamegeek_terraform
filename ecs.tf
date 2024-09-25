@@ -7,18 +7,6 @@ resource "aws_ecs_cluster" "boardgamegeek" {
   }
 }
 
-variable "s3_scraper_task_bucket" {
-  description = "The name of the S3 bucket to store the scraper task"
-  type        = string
-  default     = "boardgamegeek_scraper"
-}
-
-variable "boardgamegeek_cleaner" {
-  description = "The name of the ECS task definition for the boardgamegeek_cleaner"
-  type        = string
-  default     = "boardgamegeek_cleaner"
-}
-
 module "boardgamegeek_cleaner_ecs" {
   source                 = "./modules/ecs_task_definition"
   task_definition_family = var.boardgamegeek_cleaner
@@ -49,11 +37,7 @@ module "boardgamegeek_cleaner_dev_ecs" {
   region                 = var.REGION
 }
 
-variable "boardgamegeek_scraper" {
-  description = "The name of the ECS task definition for the boardgamegeek_scraper"
-  type        = string
-  default     = "boardgamegeek_scraper"
-}
+
 module "boardgamegeek_scraper_ecs" {
   source                 = "./modules/ecs_task_definition"
   task_definition_family = var.boardgamegeek_scraper
