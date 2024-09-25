@@ -3,7 +3,7 @@ variable "ecr_repository_name" {
   type        = string
 }
 
-output "repository_arn" {
+output "ecr_repository_name" {
   value = aws_ecr_repository.ecr_repository.arn
 }
 
