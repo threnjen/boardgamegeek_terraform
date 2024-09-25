@@ -11,7 +11,7 @@ resource "aws_iam_policy" "S3_Access_boardgamegeek_scraper" {
           "s3:GetObject"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:s3:::boardgamegeek-scraper"
+        Resource = "arn:aws:s3:::boardgamegeek_scraper"
       },
       { Action = [
         "s3:ListAllMyBuckets"
@@ -64,12 +64,12 @@ resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_lambda_functions" {
           "lambda:GetFunction"
         ],
         Resource = [
-          "arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:boardgame_scraper_fargate_trigger",
-          "arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:boardgame_scraper_fargate_trigger_dev",
-          "arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:bgg_generate_game_urls",
-          "arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:bgg_generate_user_urls",
-          "arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:boardgamegeek_cleaner_fargate_trigger",
-          "arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:boardgamegeek_cleaner_fargate_trigger_dev"
+          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgame_scraper_fargate_trigger",
+          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgame_scraper_fargate_trigger_dev",
+          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:bgg_generate_game_urls",
+          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:bgg_generate_user_urls",
+          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgamegeek_cleaner_fargate_trigger",
+          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgamegeek_cleaner_fargate_trigger_dev"
         ]
       }
     ]
@@ -101,13 +101,13 @@ resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_ecr" {
           "ecr:PutImage"
         ],
         Resource = [
-          "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek-scraper",
-          "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek-scraper-dev",
-          "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval",
-          "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval_dev",
-          "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek-cleaner",
-          "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek-cleaner-dev",
-          "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/bgg_orchestrator"
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_scraper",
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_scraper_dev",
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval",
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval_dev",
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_cleaner",
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_cleaner_dev",
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_orchestrator"
         ]
       }
     ]
@@ -123,7 +123,7 @@ resource "aws_iam_policy" "boardgamegeek_cleaner_fargate_trigger_cloudwatch" {
       {
         Effect   = "Allow",
         Action   = "logs:CreateLogGroup",
-        Resource = "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"
+        Resource = "arn:aws:logs:${var.REGION}:${data.aws_caller_identity.current.account_id}:*"
       },
       {
         Effect = "Allow",
@@ -132,8 +132,8 @@ resource "aws_iam_policy" "boardgamegeek_cleaner_fargate_trigger_cloudwatch" {
           "logs:PutLogEvents"
         ],
         Resource = [
-          "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgamegeek_cleaner_fargate_trigger:*",
-          "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgamegeek_cleaner_fargate_trigger:*"
+          "arn:aws:logs:${var.REGION}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgamegeek_cleaner_fargate_trigger:*",
+          "arn:aws:logs:${var.REGION}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgamegeek_cleaner_fargate_trigger:*"
         ]
       }
     ]
@@ -149,7 +149,7 @@ resource "aws_iam_policy" "boardgame_scraper_fargate_trigger_cloudwatch" {
       {
         Effect   = "Allow",
         Action   = "logs:CreateLogGroup",
-        Resource = "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"
+        Resource = "arn:aws:logs:${var.REGION}:${data.aws_caller_identity.current.account_id}:*"
       },
       {
         Effect = "Allow",
@@ -158,8 +158,8 @@ resource "aws_iam_policy" "boardgame_scraper_fargate_trigger_cloudwatch" {
           "logs:PutLogEvents"
         ],
         Resource = [
-          "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgame_scraper_fargate_trigger_dev:*",
-          "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgame_scraper_fargate_trigger:*"
+          "arn:aws:logs:${var.REGION}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgame_scraper_fargate_trigger_dev:*",
+          "arn:aws:logs:${var.REGION}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/boardgame_scraper_fargate_trigger:*"
         ]
       }
     ]
@@ -177,10 +177,10 @@ resource "aws_iam_policy" "bgg-scraper-describe-task-def" {
         Effect = "Allow",
         Action = "ecs:DescribeTasks",
         Resource = [
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek-scraper",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-scraper:*",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek-scraper-dev",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-scraper-dev:*"
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek_scraper",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_scraper:*",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek_scraper_dev",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_scraper_dev:*"
         ]
       },
       {
@@ -194,8 +194,8 @@ resource "aws_iam_policy" "bgg-scraper-describe-task-def" {
         Effect = "Allow",
         Action = "ecs:RunTask",
         Resource = [
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-scraper:*",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-scraper-dev:*"
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_scraper:*",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_scraper_dev:*"
         ]
       },
       {
@@ -203,8 +203,8 @@ resource "aws_iam_policy" "bgg-scraper-describe-task-def" {
         Effect = "Allow",
         Action = "iam:PassRole",
         Resource = [
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek-scraper_FargateExecutionRole",
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek-scraper_FargateTaskRole"
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek_scraper_FargateExecutionRole",
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek_scraper_FargateTaskRole"
         ]
       }
     ]
@@ -222,10 +222,10 @@ resource "aws_iam_policy" "bgg-cleaner-describe-task-def" {
         Effect = "Allow",
         Action = "ecs:DescribeTasks",
         Resource = [
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek-cleaner",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-cleaner:*",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek-cleaner-dev",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-cleaner-dev:*"
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek_cleaner",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner:*",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek_cleaner_dev",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner_dev:*"
         ]
       },
       {
@@ -239,8 +239,8 @@ resource "aws_iam_policy" "bgg-cleaner-describe-task-def" {
         Effect = "Allow",
         Action = "ecs:RunTask",
         Resource = [
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-cleaner:*",
-          "arn:aws:ecs:${var.region}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek-cleaner-dev:*"
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner:*",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner_dev:*"
         ]
       },
       {
@@ -248,8 +248,8 @@ resource "aws_iam_policy" "bgg-cleaner-describe-task-def" {
         Effect = "Allow",
         Action = "iam:PassRole",
         Resource = [
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek-cleaner_FargateExecutionRole",
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek-cleaner_FargateTaskRole"
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek_cleaner_FargateExecutionRole",
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/boardgamegeek_cleaner_FargateTaskRole"
         ]
       }
     ]

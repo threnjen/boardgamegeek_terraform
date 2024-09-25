@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 provider "aws" {
-  region = var.region
+  region = var.REGION
 }
 
 data "aws_availability_zones" "available" {
@@ -49,7 +49,7 @@ resource "aws_security_group" "ec2_dagster_port_access" {
     ingress=[
               {
                 "cidr_blocks": [
-                  "${var.my_ip_first_three_blocks}.0/24"
+                  "${var.MY_IP_FIRST_THREE_BLOCKS}.0/24"
                 ],
                 "description": "",
                 "from_port": 22,
@@ -86,7 +86,7 @@ resource "aws_security_group" "ec2_ssh_access" {
     ingress=[
               {
                 "cidr_blocks": [
-                  "${var.my_ip_first_three_blocks}.0/24"
+                  "${var.MY_IP_FIRST_THREE_BLOCKS}.0/24"
                 ],
                 "description": "",
                 "from_port": 22,

@@ -18,7 +18,7 @@ Use the .env example file to create a file called `.env` with the keys and fill 
 For the IP env var:
 - only enter the first three blocks x.x.x, anything more will throw an error
 - on Mac, use `curl -4 ifconfig.co` to get your IP
-- on Windows, use `ipconfig /all` to get your IP
+- on Windows, use `nslookup myip.opendns.com resolver1.opendns.com` to get your IP
 
 Two of the variables are pre-filled. KEEP THESE AS IS.
 
@@ -29,8 +29,8 @@ Make a new file called `backend.conf` using `touch backend.conf`
 
 In backend.conf you need to add two lines:
 
-- `region="xxxxxx"` where xxxxxx = the value for `TF_VAR_region` from your .env file
-- `bucket="xxxxxx"` where xxxxxx = the value for `TF_VAR_bucket` from your .env file
+- `region="xxxxxx"` where xxxxxx = the value for `TF_VAR_REGION` from your .env file
+- `bucket="xxxxxx"` where xxxxxx = the value for `TF_VAR_BUCKET` from your .env file
 
 ## Step 03 - Open command line to boardgamegeek_terraform directory
 
@@ -68,7 +68,7 @@ This will set up to allow you to access the orchestrator elements from your brow
 
 ## Step 06 - Set up project resources
 
-CD out to the main terraform_modules directory.
+CD out to the root directory.
 
 Run in order:
 - `terraform init -backend-config backend.conf`
@@ -85,7 +85,7 @@ Open up the MAIN boardgamegeek project directory and complete all steps through 
 
 ## Step 07 - Run the project again to finish creating the resources
 
-CD out to the main terraform_modules directory.
+CD out to the root directory.
 
 Run in order:
 - `terraform init -backend-config backend.conf`

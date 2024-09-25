@@ -1,19 +1,19 @@
-variable "bucket" {
+variable "BUCKET" {
   description = "The name of the S3 bucket to store the Terraform state file"
   type        = string
 }
 
-variable "region" {
+variable "REGION" {
   description = "AWS region. Must be in string format like: us-west-2"
   type        = string
 }
 
-variable "my_ip_first_three_blocks" {
+variable "MY_IP_FIRST_THREE_BLOCKS" {
   description = "Your current IP block x.x.x.x/24"
   type        = string
 
   validation {
-    condition     = can(regex("^([0-9]{1,3}\\.){2}[0-9]{1,3}$", var.my_ip_first_three_blocks))
+    condition     = can(regex("^([0-9]{1,3}\\.){2}[0-9]{1,3}$", var.MY_IP_FIRST_THREE_BLOCKS))
     error_message = "The partial IP must be in the format x.x.x, with exactly three blocks of numbers separated by dots. On Mac, you can get your ip with 'curl -4 ifconfig.co'"
   }
 }

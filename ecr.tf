@@ -14,22 +14,22 @@ module "bgg_orchestrator" {
   
 }
 
-module "boardgamegeek_cleaner" {
+module "boardgamegeek_cleaner_ecr" {
   source = "./modules/ecr"
   ecr_repository_name = "boardgamegeek_cleaner"
 }
 
-module "boardgamegeek_cleaner_dev" {
+module "boardgamegeek_cleaner_dev_ecr" {
   source = "./modules/ecr"
   ecr_repository_name = "boardgamegeek_cleaner_dev"
 }
 
-module "boardgamegeek_scraper" {
+module "boardgamegeek_scraper_ecr" {
   source = "./modules/ecr"
   ecr_repository_name = "boardgamegeek_scraper"
 }
 
-module "boardgamegeek_scraper_dev" {
+module "boardgamegeek_scraper_dev_ecr" {
   source = "./modules/ecr"
   ecr_repository_name = "boardgamegeek_scraper_dev"
 }
