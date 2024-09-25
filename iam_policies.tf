@@ -106,7 +106,7 @@ resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_ecr" {
           "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval",
           "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval_dev",
           "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_cleaner",
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_cleaner_devdev",
+          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_cleaner_dev",
           "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_orchestrator"
         ]
       }
@@ -224,8 +224,8 @@ resource "aws_iam_policy" "bgg-cleaner-describe-task-def" {
         Resource = [
           "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek_cleaner",
           "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner:*",
-          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek_cleaner_devdev",
-          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner_devdev:*"
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task/*/boardgamegeek_cleaner_dev",
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner_dev:*"
         ]
       },
       {
@@ -240,7 +240,7 @@ resource "aws_iam_policy" "bgg-cleaner-describe-task-def" {
         Action = "ecs:RunTask",
         Resource = [
           "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner:*",
-          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner_devdev:*"
+          "arn:aws:ecs:${var.REGION}:${data.aws_caller_identity.current.account_id}:task-definition/boardgamegeek_cleaner_dev:*"
         ]
       },
       {
