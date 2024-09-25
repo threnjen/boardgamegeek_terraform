@@ -36,12 +36,12 @@ module "boardgamegeek_scraper_fargate_trigger_role" {
 
 resource "aws_iam_role_policy_attachment" "boardgamegeek_scraper_describe" {
   role       = module.boardgamegeek_scraper_fargate_trigger_role.role_name
-  policy_arn = aws_iam_policy.bgg-scraper-describe-task-def.arn
+  policy_arn = module.bgg-scraper-describe-task-def.lambda_ecs_trigger_arn
 }
 
 resource "aws_iam_role_policy_attachment" "boardgamegeek_scraper_cloudwatch" {
   role       = module.boardgamegeek_scraper_fargate_trigger_role.role_name
-  policy_arn = aws_iam_policy.boardgame_scraper_fargate_trigger_cloudwatch.arn
+  policy_arn = module.boardgame_scraper_fargate_trigger_cloudwatch.cloudwatch_arn
 }
 
 resource "aws_iam_role_policy_attachment" "boardgamegeek_scraper_S3" {
@@ -56,12 +56,12 @@ module "boardgamegeek_cleaner_fargate_trigger_role" {
 
 resource "aws_iam_role_policy_attachment" "boardgamegeek_cleaner_cloudwatch" {
   role       = module.boardgamegeek_cleaner_fargate_trigger_role.role_name
-  policy_arn = aws_iam_policy.boardgamegeek_cleaner_fargate_trigger_cloudwatch.arn
+  policy_arn = module.boardgamegeek_cleaner_fargate_trigger_cloudwatch.cloudwatch_arn
 }
 
 resource "aws_iam_role_policy_attachment" "boardgamegeek_cleaner_describe" {
   role       = module.boardgamegeek_cleaner_fargate_trigger_role.role_name
-  policy_arn = aws_iam_policy.bgg-cleaner-describe-task-def.arn
+  policy_arn = module.bgg-cleaner-describe-task-def.lambda_ecs_trigger_arn
 }
 
 resource "aws_iam_role_policy_attachment" "boardgamegeek_cleaner_s3" {
