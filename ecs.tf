@@ -25,7 +25,7 @@ variable "boardgamegeek_scraper" {
   default = "boardgamegeek_scraper"
 }
 
-module "boardgamegeek_cleaner" {
+module "boardgamegeek_cleaner_ecs" {
     source = "./modules/ecs_task_definition"
     task_definition_family=var.boardgamegeek_cleaner
     task_definition_name =var.boardgamegeek_cleaner
@@ -40,7 +40,7 @@ module "boardgamegeek_cleaner" {
     region = var.REGION
 }
 
-module "boardgamegeek_cleaner_dev" {
+module "boardgamegeek_cleaner_dev_ecs" {
     source = "./modules/ecs_task_definition"
     task_definition_family="${var.boardgamegeek_cleaner}_dev"
     task_definition_name ="${var.boardgamegeek_cleaner}_dev"
@@ -55,7 +55,7 @@ module "boardgamegeek_cleaner_dev" {
     region = var.REGION
 }
 
-module "boardgamegeek_scraper" {
+module "boardgamegeek_scraper_ecs" {
     source = "./modules/ecs_task_definition"
     task_definition_family=var.boardgamegeek_scraper
     task_definition_name =var.boardgamegeek_scraper
@@ -70,7 +70,7 @@ module "boardgamegeek_scraper" {
     region = var.REGION
 }
 
-module "boardgamegeek_scraper_dev" {
+module "boardgamegeek_scraper_dev_ecs" {
     source = "./modules/ecs_task_definition"
     task_definition_family="${var.boardgamegeek_scraper}_dev"
     task_definition_name ="${var.boardgamegeek_scraper}_dev"
