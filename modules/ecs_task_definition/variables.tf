@@ -18,26 +18,26 @@ variable "env_file" {
     type = string
 }
 
-variable task_role_arn {
+variable "task_role_arn" {
   type = string
 }
 
-variable execution_role_arn {
+variable "execution_role_arn" {
   type = string
 }
 
-variable cpu {
+variable "cpu" {
   type = string
 }
 
-variable memory {
+variable "memory" {
   type = string
 }
 
-variable region {
+variable "region" {
   type = string
 }
 
-variable image {
+variable "image" {
   type = string
 }
