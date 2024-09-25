@@ -1,3 +1,15 @@
+# Locals block to aggregate the function names or other relevant outputs
+locals {
+  lambda_functions = [
+    module.boardgame_scraper_fargate_trigger.function_name,
+    module.boardgame_scraper_fargate_trigger_dev.function_name,
+    module.bgg_generate_game_urls.function_name,
+    module.bgg_generate_user_urls.function_name,
+    module.boardgamegeek_cleaner_fargate_trigger.function_name,
+    module.boardgamegeek_cleaner_fargate_trigger_dev.function_name
+  ]
+}
+
 module "bgg_generate_game_urls" {
   source        = "./modules/lambda_function_direct"
   function_name = "bgg_generate_game_urls"
@@ -62,22 +74,5 @@ module "boardgamegeek_cleaner_fargate_trigger_dev" {
   environment   = "dev"
 }
 
-resource "aws_lambda_function" "bgg_boardgame_file_retrieval" {
-  depends_on    = [module.bgg_boardgame_file_retrieval]
-  function_name = "bgg_boardgame_file_retrieval"
-  timeout       = 900
-  memory_size   = 512
-  image_uri     = "${module.bgg_boardgame_file_retrieval.repository_url}:latest"
-  package_type  = "Image"
 
-  role = module.bgg_boardgame_file_retrieval_role.arn
-
-  environment {
-    variables = merge(
-      { for tuple in regexall("(.*?)=(.*)", file(".env")) : tuple[0] => tuple[1] },
-      {
-        ENV = "prod"
-    })
-  }
-}
 

@@ -56,12 +56,7 @@ resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_lambda_functions" {
           "lambda:GetFunction"
         ],
         Resource = [
-          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgame_scraper_fargate_trigger",
-          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgame_scraper_fargate_trigger_dev",
-          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:bgg_generate_game_urls",
-          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:bgg_generate_user_urls",
-          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgamegeek_cleaner_fargate_trigger",
-          "arn:aws:lambda:${var.REGION}:${data.aws_caller_identity.current.account_id}:function:boardgamegeek_cleaner_fargate_trigger_dev"
+          for repo in local.lambda_functions : format("arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/%s", repo)
         ]
       }
     ]
@@ -93,13 +88,7 @@ resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_ecr" {
           "ecr:PutImage"
         ],
         Resource = [
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_scraper",
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_scraper_dev",
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval",
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_boardgame_file_retrieval_dev",
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_cleaner",
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/boardgamegeek_cleaner_dev",
-          "arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/bgg_orchestrator"
+          for repo in local.ecr_repositories : format("arn:aws:ecr:${var.REGION}:${data.aws_caller_identity.current.account_id}:repository/%s", repo)
         ]
       }
     ]
