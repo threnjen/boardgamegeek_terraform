@@ -3,6 +3,10 @@ variable "ecr_repository_name" {
   type        = string
 }
 
+output "repository_arn" {
+  value = aws_ecr_repository.ecr_repository.arn
+}
+
 resource "aws_ecr_repository" "ecr_repository" {
   name = var.ecr_repository_name
   image_scanning_configuration {
