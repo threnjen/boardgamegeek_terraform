@@ -17,39 +17,3 @@ variable "MY_IP_FIRST_THREE_BLOCKS" {
     error_message = "The partial IP must be in the format x.x.x, with exactly three blocks of numbers separated by dots. On Mac, you can get your ip with 'curl -4 ifconfig.co'"
   }
 }
-
-variable "AWSLambdaBasicExecutionRole" {
-  description = "The ARN of the AWSLambdaBasicExecutionRole"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-}
-
-variable "AmazonEC2ContainerServiceRole" {
-  description = "The ARN of the AmazonEC2ContainerServiceRole"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole"
-}
-
-variable "AWSAppRunnerServicePolicyForECRAccess" {
-  description = "The ARN of the AWSAppRunnerServicePolicyForECRAccess"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
-}
-
-variable "CloudWatchLogsFullAccess" {
-  description = "The ARN of the CloudWatchLogsFullAccess"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
-}
-
-variable "CloudWatchFullAccessV2" {
-  description = "The ARN of the CloudWatchFullAccessV2"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/CloudWatchFullAccessV2"
-}
-
-variable "AmazonECSTaskExecutionRolePolicy" {
-  description = "The ARN of the AmazonECSTaskExecutionRolePolicy"
-  type        = string
-  default     = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
