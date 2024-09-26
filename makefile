@@ -1,11 +1,11 @@
 GLOBAL_PYTHON = $(DEFAULT_PYTHON)
 
 create_env:
-	pip install pipenv;
+	pip install pipenv && \
 	pipenv shell;
 
 create_backend_config:
-	echo "region=\"$(TF_VAR_REGION)\"" > backend.conf;
+	echo "region=\"$(TF_VAR_REGION)\"" > backend.conf  && \
 	echo "bucket=\"$(TF_VAR_BUCKET)\"" >> backend.conf;
 
 install_state_file_bucket:
