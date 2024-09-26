@@ -1,5 +1,5 @@
 
-resource "aws_iam_role" "GitHubActions_Push_Role" {
+resource "aws_iam_role" "GitHubActions_Push_Role_role" {
   name = "GitHubActions_Push_Role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -23,17 +23,17 @@ resource "aws_iam_role" "GitHubActions_Push_Role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "boardgamegeekscraper_github_cicd_ecrGitHubActions_Push_Role" {
-  role       = aws_iam_role.GitHubActions_Push_Role.name
-  policy_arn = aws_iam_policy.boardgamegeekscraper_github_cicd_ecr.arn
+resource "aws_iam_role_policy_attachment" "boardgamegeekscraper_github_cicd_ecrGitHubActions_Push_Role_attach" {
+  role       = aws_iam_role.GitHubActions_Push_Role_role.name
+  policy_arn = aws_iam_policy.boardgamegeekscraper_github_cicd_ecr_policy.arn
 }
 
-resource "aws_iam_role_policy_attachment" "boardgamegeekscraper_github_cicd_lambda_functionsGitHubActions_Push_Role" {
-  role       = aws_iam_role.GitHubActions_Push_Role.name
-  policy_arn = aws_iam_policy.boardgamegeekscraper_github_cicd_lambda_functions.arn
+resource "aws_iam_role_policy_attachment" "boardgamegeekscraper_github_cicd_lambda_functionsGitHubActions_Push_Role_attach" {
+  role       = aws_iam_role.GitHubActions_Push_Role_role.name
+  policy_arn = aws_iam_policy.boardgamegeekscraper_github_cicd_lambda_functions_policy.arn
 }
 
-resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_lambda_functions" {
+resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_lambda_functions_policy" {
   name = "boardgamegeekscraper_github_cicd_lambda_functions"
   path = "/"
   policy = jsonencode({
@@ -63,7 +63,7 @@ resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_lambda_functions" {
   })
 }
 
-resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_ecr" {
+resource "aws_iam_policy" "boardgamegeekscraper_github_cicd_ecr_policy" {
   name = "boardgamegeekscraper_github_cicd_ecr"
   path = "/"
   policy = jsonencode({
