@@ -20,7 +20,6 @@ resource "aws_iam_role_policy_attachment" "bgg_generate_game_urls_lambda_role" {
 module "bgg_generate_user_urls_lambda" {
   source    = "./modules/iam_lambda_roles"
   role_name = "bgg_generate_user_urls_lambda"
-
 }
 
 resource "aws_iam_role_policy_attachment" "bgg_generate_user_urls_lambda" {
@@ -31,7 +30,6 @@ resource "aws_iam_role_policy_attachment" "bgg_generate_user_urls_lambda" {
 module "boardgamegeek_scraper_fargate_trigger_role" {
   source    = "./modules/iam_lambda_roles"
   role_name = "boardgamegeek_scraper_fargate_trigger_role"
-
 }
 
 resource "aws_iam_role_policy_attachment" "boardgamegeek_scraper_describe" {
