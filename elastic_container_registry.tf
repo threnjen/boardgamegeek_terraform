@@ -17,10 +17,6 @@ module "bgg_boardgame_file_retrieval_ecr" {
   ecr_repository_name = "bgg_boardgame_file_retrieval"
 }
 
-output "bgg_boardgame_file_retrieval_repository_url" {
-  value = module.bgg_boardgame_file_retrieval_ecr.repository_url
-}
-
 module "bgg_orchestrator_ecr" {
   source              = "./modules/ecr"
   ecr_repository_name = "bgg_orchestrator"
