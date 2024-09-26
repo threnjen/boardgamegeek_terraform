@@ -3,8 +3,8 @@
 # Locals block to aggregate the function names or other relevant outputs
 locals {
   ecr_repositories = [
-    module.bgg_boardgame_file_retrieval.ecr_repository_name,
-    module.bgg_orchestrator.ecr_repository_name,
+    module.bgg_boardgame_file_retrieval_ecr.ecr_repository_name,
+    module.bgg_orchestrator_ecr.ecr_repository_name,
     module.boardgamegeek_cleaner_ecr.ecr_repository_name,
     module.boardgamegeek_cleaner_dev_ecr.ecr_repository_name,
     module.boardgamegeek_scraper_ecr.ecr_repository_name,
@@ -12,16 +12,12 @@ locals {
   ]
 }
 
-module "bgg_boardgame_file_retrieval" {
+module "bgg_boardgame_file_retrieval_ecr" {
   source              = "./modules/ecr"
   ecr_repository_name = "bgg_boardgame_file_retrieval"
 }
 
-output "bgg_boardgame_file_retrieval_repository_url" {
-  value = module.bgg_boardgame_file_retrieval.repository_url
-}
-
-module "bgg_orchestrator" {
+module "bgg_orchestrator_ecr" {
   source              = "./modules/ecr"
   ecr_repository_name = "bgg_orchestrator"
 

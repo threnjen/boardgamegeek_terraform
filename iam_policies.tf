@@ -1,4 +1,4 @@
-resource "aws_iam_policy" "S3_Access_boardgamegeek_scraper" {
+resource "aws_iam_policy" "S3_Access_boardgamegeek_scraper_policy" {
   name = "S3_Access_boardgamegeek_scraper"
   path = "/"
   policy = jsonencode({
@@ -22,7 +22,7 @@ resource "aws_iam_policy" "S3_Access_boardgamegeek_scraper" {
   })
 }
 
-resource "aws_iam_policy" "Cloudwatch_Put_Metrics" {
+resource "aws_iam_policy" "Cloudwatch_Put_Metrics_policy" {
   name = "Cloudwatch_Put_Metrics"
   path = "/"
   policy = jsonencode({
@@ -41,7 +41,7 @@ resource "aws_iam_policy" "Cloudwatch_Put_Metrics" {
   })
 }
 
-module "boardgamegeek_cleaner_fargate_trigger_cloudwatch" {
+module "bgg_cleaner_fargate_trigger_cloudwatch_policy" {
   source = "./modules/lambda_ecs_trigger_policies"
   name   = "${var.boardgamegeek_cleaner}_fargate_trigger_cloudwatch"
   task_name = var.boardgamegeek_cleaner
@@ -49,21 +49,21 @@ module "boardgamegeek_cleaner_fargate_trigger_cloudwatch" {
   account_id = data.aws_caller_identity.current.account_id
 }
 
-module "boardgame_scraper_fargate_trigger_cloudwatch" {
+module "bgg_scraper_fargate_trigger_cloudwatch_policy" {
   source = "./modules/lambda_ecs_trigger_policies"
   name   = "${var.boardgamegeek_scraper}_fargate_trigger_cloudwatch"
   task_name = var.boardgamegeek_scraper
   region = var.REGION
   account_id = data.aws_caller_identity.current.account_id
 }
-module "bgg-scraper-describe-task-def" {
+module "bgg_scraper_describe_task_def_policy" {
   source = "./modules/lambda_ecs_trigger_policies"
   name   = "${var.boardgamegeek_scraper}_lambda_ecs_trigger"
   task_name = var.boardgamegeek_scraper
   region = var.REGION
   account_id = data.aws_caller_identity.current.account_id
 }
-module "bgg-cleaner-describe-task-def" {
+module "bgg_cleaner_describe_task_def_policy" {
   source = "./modules/lambda_ecs_trigger_policies"
   name   = "${var.boardgamegeek_cleaner}_lambda_ecs_trigger"
   task_name = var.boardgamegeek_cleaner

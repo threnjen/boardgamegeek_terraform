@@ -1,9 +1,9 @@
-resource "aws_lambda_function" "bgg_boardgame_file_retrieval" {
-  depends_on    = [module.bgg_boardgame_file_retrieval]
+resource "aws_lambda_function" "bgg_boardgame_file_retrieval_lambda" {
+  depends_on    = [module.bgg_boardgame_file_retrieval_ecr]
   function_name = "bgg_boardgame_file_retrieval"
   timeout       = 900
   memory_size   = 512
-  image_uri     = "${module.bgg_boardgame_file_retrieval.repository_url}:latest"
+  image_uri     = "${module.bgg_boardgame_file_retrieval_ecr.repository_url}:latest"
   package_type  = "Image"
 
   role = module.bgg_boardgame_file_retrieval_role.arn
