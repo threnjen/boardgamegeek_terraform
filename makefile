@@ -5,7 +5,12 @@ GLOBAL_PYTHON = $(DEFAULT_PYTHON)
 TF_VAR_REGION =
 TF_VAR_BUCKET =
 
-create_env:
+clean:
+	@echo "\nCleaning up the terraform modules directory"
+	- [ -d .terraform/modules ] && rm -r .terraform/modules
+	- [ -f .terraform/terraform.tfstate ] && rm .terraform/terraform.tfstate
+
+create_env: clean
 	@if [ "$(OS)" = "Windows_NT" ]; then \
 		pip3 install pipenv; \
 	elif [ "$(shell uname)" = "Darwin" ]; then \
@@ -25,24 +30,14 @@ require_confirmation_env:  create_env
 get_region: require_confirmation_env
 	@echo "\nType the region you want to deploy to in format us-region-#. EXAMPLE us-west-2" ; \
 	read -p "Enter region: " response; \
-	TF_VAR_REGION=$$response; \
-	echo "\nTF_VAR_REGION=$$TF_VAR_REGION" >> .env
-    $(MAKE) set_region REGION=$$response
-    export TF_VAR_REGION
-
-set_region:
-	$(eval TF_VAR_REGION := $(REGION))
+	echo "\nTF_VAR_REGION=$$response" >> .env && \
+	echo "region=\"$$response\"" > backend.conf
 
 get_terraform_bucket: get_region
 	@echo "\nType the name of the S3 bucket you want to use for Terraform files and press Enter. EXAMPLE my-terraform-bucket" ; \
-    read -p "Enter bucket name: " response; \
-    TF_VAR_BUCKET=$$response; \
-    echo "\nTF_VAR_BUCKET=$$TF_VAR_BUCKET" >> .env
-    $(MAKE) set_bucket BUCKET=$$response
-    export TF_VAR_BUCKET
-
-set_bucket:
-	$(eval TF_VAR_BUCKET := $(BUCKET))
+	read -p "Enter bucket name: " response; \
+	echo "\nTF_VAR_BUCKET=$$response" >> .env && \
+	echo "bucket=\"$$response\"" >> backend.conf
 
 get_current_ip: get_terraform_bucket
 	@echo "\n"
@@ -54,8 +49,6 @@ get_current_ip: get_terraform_bucket
 
 # Make the backend config file for terraform
 backend_config: get_current_ip
-	@echo 'region="$(TF_VAR_REGION)"' > backend.conf && \
-	echo 'bucket="$(TF_VAR_BUCKET)"' >> backend.conf && \
 	echo 'key="boardgamegeek.tfstate"' >> backend.conf
 
 # A target that runs the Python script and checks the output
