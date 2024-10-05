@@ -68,8 +68,10 @@ def run_validations(region, bucket_name):
 
 
 if __name__ == "__main__":
+
     bucket_name = os.environ.get("TF_VAR_BUCKET")
     region = os.environ.get("TF_VAR_REGION")
 
     validation_report = run_validations(region, bucket_name)
+
     print(validation_report)
